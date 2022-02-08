@@ -1,0 +1,8 @@
+ansible_ssh_user: Simon
+ansible_winrm_operation_timeout_sec: 90
+ansible_winrm_read_timeout_sec: 300
+ansible_winrm_transport: credssp
+ansible_ssh_pass: password
+ansible_winrm_server_cert_validation: ignore
+ansible_ssh_port: 5986
+ansible_connection: winrm

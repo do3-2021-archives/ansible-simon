@@ -1,0 +1,16 @@
+---
+- hosts: rocky-0:debian-0
+  tasks:
+    - name: Redémarrer le service Apache
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+        enabled: true
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Redémarrer le service httpd
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+        enabled: true
+      when: ansible_facts['os_family'] == "Redhat"

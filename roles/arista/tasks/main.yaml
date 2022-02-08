@@ -1,0 +1,26 @@
+# - name: run show version on remote devices
+#   arista.eos.eos_command:
+#     commands: show version
+#   register: logs
+
+# - debug: msg="{{ logs.stdout }}"
+
+# - name: Gather only the interfaces resource facts and no legacy facts
+#   arista.eos.eos_facts:
+#     gather_subset:
+#     - '!all'
+#     - '!min'
+#     gather_network_resources:
+#     - interfaces
+#   register: facts
+
+# - debug: msg="{{ facts }}"
+# 
+# 
+# 
+
+
+- name: load configuration from file
+  arista.eos.eos_config:
+    src: eos.cfg
+    save_when: always

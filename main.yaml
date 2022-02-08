@@ -1,0 +1,40 @@
+- hosts: Pctpansible
+  gather_facts: yes
+  roles:
+    - role: Pctpansible
+
+- hosts: Pctpansible
+  gather_facts: yes
+  roles:
+    - role: deekayen.chocolatey
+      chocolatey_installer: https://chocolatey.org/install.ps1
+      chocolatey_path: c:/ProgramData/chocolatey
+
+- hosts: arista
+  gather_facts: yes
+  roles:
+    - role: arista
+
+- hosts: webserver
+  gather_facts: yes
+  become: yes
+  become_user: root
+  roles:
+    - role: web-servers
+
+- hosts: firewall
+  vars_files:
+    - roles/firewall/defaults/main.yaml
+  roles:
+    - { role: geerlingguy.firewall }
+
+
+- name: Create container
+  hosts: localhost
+  tasks:
+  - name: Create a container
+    docker_container:
+      name: 203-debian-mine
+      image: registry.iutbeziers.fr/debianiut
+      ports:
+      - "8080:80"
